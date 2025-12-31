@@ -14,7 +14,7 @@ Direct Preference Optimization (DPO): We employ expert-aligned preference data t
 🤖 2. AcuAgent: Multi-Agent Collaboration
 To simulate real-world doctor-patient interactions, we designed AcuAgent, a system centered on AcuModel that coordinates specialized sub-agents.
 AcuRouter (Semantic Task Routing):** A lightweight, millisecond-level routing mechanism based on multi-feature fusion (keywords, semantic similarity, and syntactic patterns). It dynamically distributes user intents to the most appropriate processing module (Clinical Diagnosis vs. Knowledge Query).
-Graph-Driven Reverse Reasoning:** Addressing sparse patient descriptions, AcuAgent utilizes the Acupuncture Knowledge Graph (AcuKG). It leverages co-occurrence laws (e.g., "Same Acupoint Treating Multiple Symptoms") to proactively generate follow-up questions, guiding the user to a complete symptom profile.
+Graph-Driven Reverse Reasoning: Addressing sparse patient descriptions, AcuAgent utilizes the Acupuncture Knowledge Graph (AcuKG). It leverages co-occurrence laws (e.g., "Same Acupoint Treating Multiple Symptoms") to proactively generate follow-up questions, guiding the user to a complete symptom profile.
 
 📚 3. Multi-Source Knowledge Fusion
 Our architecture integrates structured and unstructured knowledge to ensure precision:
@@ -57,3 +57,4 @@ Subject: [Academic Request] Access to AcuModel & Data
 Content: Please include a brief introduction of your research team and the intended use of the model.
 
 We verify requests to prevent misuse and foster a safe research community. We look forward to your email!
+
