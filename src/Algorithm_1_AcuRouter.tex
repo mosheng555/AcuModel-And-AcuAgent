@@ -1,0 +1,26 @@
+\begin{algorithm}[h]
+\caption{AcuRouter: Multi-Feature Fusion Semantic Routing}
+\label{alg:acurouter}
+\begin{algorithmic}[1]
+\Require Query $Q$, CategorySet $\mathcal{C}$, Weights $\alpha, \beta, \gamma$, Templates $\mathcal{T}$, Patterns $\mathcal{P}$
+\Ensure OptimalCategory $c^*$
+
+\Function{AcuRouter}{$Q$}
+    \State $Scores \leftarrow \emptyset$
+    \For{each $c \in \mathcal{C}$}
+        \State $S_{kw} \leftarrow \min(\frac{1}{\eta} \sum w_k \cdot \mathbb{I}(k \in Q), 1.0)$
+        \State $v_Q \leftarrow \text{Encoder}(Q)$
+        \State $S_{sem} \leftarrow \max_{t \in \mathcal{T}_c} \text{CosineSim}(v_Q, v_t)$
+        \State $S_{pat} \leftarrow \mathbb{I}(\exists p \in \mathcal{P}_c \text{ s.t. } \text{Match}(p, Q))$
+        \State $Score_c \leftarrow \alpha \cdot S_{kw} + \beta \cdot S_{sem} + \gamma \cdot S_{pat}$
+        \State $Scores[c] \leftarrow Score_c$
+    \EndFor
+    \State $c^* \leftarrow \arg\max_{c \in \mathcal{C}} Scores[c]$
+    \If{$c^* == \text{TargetedTreatment}$}
+        \State $(E_{body}, E_{sym}) \leftarrow \text{ExtractEntities}(Q)$
+        \State \Return $(c^*, E_{body}, E_{sym})$
+    \EndIf
+    \State \Return $c^*$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
