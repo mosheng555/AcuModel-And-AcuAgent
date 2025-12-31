@@ -1,0 +1,44 @@
+\begin{algorithm}[h]
+\caption{Graph-Driven Interactive Reverse Reasoning}
+\label{alg:reverse_reasoning}
+\begin{algorithmic}[1]
+\Require InitialSymptom $S_{init}$, KnowledgeGraph $\mathcal{G}$, MaxRounds $T$
+\Ensure SymptomSet $\mathcal{S}_{final}$
+
+\Function{InteractiveDiagnosis}{$S_{init}$}
+    \State $\mathcal{S}_{final} \leftarrow \{S_{init}\}$
+    \State $History \leftarrow \text{InitHistory}(S_{init})$
+    
+    \State $\mathcal{A}_{related} \leftarrow \{a \mid \exists s \in \mathcal{S}_{final}, (a, \text{treats}, s) \in \mathcal{G}.E\}$
+    \State $\mathcal{S}_{cand} \leftarrow \bigcup_{a \in \mathcal{A}_{related}} \{s' \mid (a, \text{treats}, s') \in \mathcal{G}.E\}$
+    \State $\mathcal{S}_{cand} \leftarrow \mathcal{S}_{cand} \setminus \mathcal{S}_{final}$
+
+    \For{$t = 1$ to $T$}
+        \If{$\mathcal{S}_{cand} = \emptyset$}
+            \State \textbf{break}
+        \EndIf
+        
+        \If{$t == 1$}
+            \State $Q_{next} \leftarrow \text{GenerateKgInquiry}(\mathcal{S}_{cand})$
+        \Else
+            \State $Q_{next} \leftarrow \text{GenerateLlmInquiry}(History)$
+        \EndIf
+        
+        \State $R_{user} \leftarrow \text{UserInteraction}(Q_{next})$
+        \State $\mathcal{S}_{new} \leftarrow \text{ExtractConfirmedSymptoms}(R_{user})$
+        
+        \If{$\mathcal{S}_{new} = \emptyset$}
+            \State \textbf{break}
+        \EndIf
+        
+        \State $\mathcal{S}_{final} \leftarrow \mathcal{S}_{final} \cup \mathcal{S}_{new}$
+        \State $History \leftarrow \text{Update}(History, Q_{next}, R_{user})$
+        \State $\mathcal{A}_{related} \leftarrow \{a \mid \exists s \in \mathcal{S}_{new}, (a, \text{treats}, s) \in \mathcal{G}.E\}$
+        \State $\mathcal{S}_{temp} \leftarrow \bigcup_{a \in \mathcal{A}_{related}} \{s' \mid (a, \text{treats}, s') \in \mathcal{G}.E\}$
+        \State $\mathcal{S}_{cand} \leftarrow (\mathcal{S}_{cand} \cup \mathcal{S}_{temp}) \setminus \mathcal{S}_{final}$
+    \EndFor
+    
+    \State \Return $\mathcal{S}_{final}$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
