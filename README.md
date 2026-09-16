@@ -12,12 +12,12 @@
 
 ## Results
 
-| Benchmark | AcuModel | AcuModel-AcuAgent | Best Baseline |
+| Benchmark | AcuModel | AcuModel-AcuAgent | Best Baseline(AcuGPT) |
 |---|---|---|---|
-| SCQ-AcuBench (acc) | 0.7911 | — | 0.7629 (AcuGPT) |
-| QA-AcuEval (LLM-judge) | 0.6888 | **0.9184** | 0.6457(AcuGPT) |
-| Hallucination error rate | 0.3750 | **0.0733** | 0.4083(AcuGPT) |
-| Expert blind eval (/100) | 63 | **78** | 59 (AcuGPT) |
+| SCQ-AcuBench (acc) | 0.7911 | — | 0.7629 |
+| QA-AcuEval (LLM-judge) | 0.6888 | **0.9184** | 0.6457 |
+| Hallucination error rate | 0.3750 | **0.0733** | 0.4083 |
+| Expert blind eval (/100) | 63 | **78** | 59 |
 
 Baselines: AcuGPT, HuatuoGPT-o1, MedChatZH, LLaMA-3.1.
 
