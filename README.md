@@ -5,7 +5,7 @@
 ## Highlights
 
 - **AcuModel** — Two-stage SFT (general medical logic → acupuncture knowledge) + DPO with expert-aligned preference data for reliable clinical reasoning.
-- **AcuRouter** — Millisecond-level intent routing across Clinical Diagnosis and Knowledge Query via multi-feature fusion (keywords, semantics, syntax).
+- **AcuRouter** — Millisecond-level intent routing via multi-feature fusion (keywords, semantics, syntax).
 - **Graph-driven reverse reasoning** — Uses AcuKG (~39K Meridian–Acupoint–Symptom–Treatment triplets) to ask follow-up questions and complete sparse symptom profiles.
 - **Multi-source knowledge** — AcuKG + RAG over 500+ acupuncture classics + standardized acupoint/symptom databases.
 - **Two benchmarks** — SCQ-AcuBench (1,030 theory questions) and QA-AcuEval (600 clinical cases).
