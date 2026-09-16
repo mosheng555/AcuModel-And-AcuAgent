@@ -31,7 +31,7 @@ QA-AcuEval: 600 clinical cases assessing reasoning and treatment plan generation
 
 📊 Performance
 
-Experimental results demonstrate that AcuModel achieves scores of 0.7911 and 0.7072 on SCQ-AcuBench and QA-AcuEval, respectively. With the AcuAgent architecture, performance on clinical case evaluation is further elevated to 0.8507, significantly outperforming baseline models like AcuGPT, HuatuoGPT, and LLaMA-3.1.
+Experimental results demonstrate that AcuModel achieves an accuracy of 0.7911 on SCQ-AcuBench, outperforming the strongest acupuncture-oriented baseline AcuGPT (0.7629) by 2.82%. On QA-AcuEval (LLM-as-a-Judge score), AcuModel reaches 0.6888, and the AcuModel-AcuAgent system further elevates the score to 0.9184 while reducing the hallucination-related error rate from 0.3750 to 0.0733, significantly outperforming baseline models like AcuGPT, HuatuoGPT-o1, MedChatZH, and LLaMA-3.1. In the expert-in-the-loop blind evaluation, AcuModel-AcuAgent obtained a cumulative score of 78/100 (vs. 63 for AcuModel and 59 for AcuGPT).
 
 🛠️ System Architecture
 
