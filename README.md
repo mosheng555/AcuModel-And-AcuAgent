@@ -1,48 +1,35 @@
-AcuModel & AcuAgent: Intelligent Acupuncture Diagnosis System
-AcuModel and AcuAgent represent a cutting-edge solution for intelligent acupuncture diagnosis and treatment. By combining domain-specific Large Language Models (LLMs) with a robust multi-agent architecture, this project addresses the challenges of complex meridian theory understanding and clinical reasoning in Traditional Chinese Medicine (TCM).
+# AcuModel & AcuAgent: Intelligent Acupuncture Diagnosis System
 
-Key Innovations
-Our system introduces several groundbreaking features tailored for the acupuncture domain:
+**AcuModel** is a domain-specific LLM (fine-tuned from Qwen2.5-7B-Instruct) for acupuncture, and **AcuAgent** is a multi-agent system built on top of it that simulates real doctor–patient interactions.
 
-1. AcuModel: Domain-Specific LLM with DPO
-We present AcuModel, built upon the Qwen2.5-7B-Instruct base. Unlike general medical models, AcuModel undergoes a rigorous training process:
-Two-Stage SFT: We utilize a "General Medical Logic -> Acupuncture Domain Knowledge" learning path to ensure both medical common sense and deep professional expertise.
-Direct Preference Optimization (DPO): We employ expert-aligned preference data to significantly enhance the model's clinical reasoning reliability and reduce hallucinations.
-2. AcuAgent: Multi-Agent Collaboration
-To simulate real-world doctor-patient interactions, we designed AcuAgent, a system centered on AcuModel that coordinates specialized sub-agents.
-AcuRouter (Semantic Task Routing): A lightweight, millisecond-level routing mechanism based on multi-feature fusion (keywords, semantic similarity, and syntactic patterns). It dynamically distributes user intents to the most appropriate processing module (Clinical Diagnosis vs. Knowledge Query).
-Graph-Driven Reverse Reasoning: Addressing sparse patient descriptions, AcuAgent utilizes the Acupuncture Knowledge Graph (AcuKG). It leverages co-occurrence laws (e.g., "Same Acupoint Treating Multiple Symptoms") to proactively generate follow-up questions, guiding the user to a complete symptom profile.
-3. Multi-Source Knowledge Fusion
-Our architecture integrates structured and unstructured knowledge to ensure precision:
-AcuKG: Contains ~39,000 semantic triplets (Meridian-Acupoint-Symptom-Treatment).
-RAG Module: Retrieval-Augmented Generation based on 500+ ancient and modern acupuncture classics.
-Clinical Databases: Standardized acupoint positioning and symptom-acupoint mapping.
-4. Specialized Evaluation Benchmarks
-We constructed two dedicated datasets to standardize evaluation in the field:
-SCQ-AcuBench: 1,030 objective questions testing theoretical mastery (Meridians, Acupoints).
-QA-AcuEval: 600 clinical cases assessing reasoning and treatment plan generation.
+## Highlights
 
+- **AcuModel** — Two-stage SFT (general medical logic → acupuncture knowledge) + DPO with expert-aligned preference data for reliable clinical reasoning.
+- **AcuRouter** — Millisecond-level intent routing across Clinical Diagnosis and Knowledge Query via multi-feature fusion (keywords, semantics, syntax).
+- **Graph-driven reverse reasoning** — Uses AcuKG (~39K Meridian–Acupoint–Symptom–Treatment triplets) to ask follow-up questions and complete sparse symptom profiles.
+- **Multi-source knowledge** — AcuKG + RAG over 500+ acupuncture classics + standardized acupoint/symptom databases.
+- **Two benchmarks** — SCQ-AcuBench (1,030 theory questions) and QA-AcuEval (600 clinical cases).
 
+## Results
 
-Performance
-Experimental results demonstrate that AcuModel achieves an accuracy of 0.7911 on SCQ-AcuBench, outperforming the strongest acupuncture-oriented baseline AcuGPT (0.7629) by 2.82%. On QA-AcuEval (LLM-as-a-Judge score), AcuModel reaches 0.6888, and the AcuModel-AcuAgent system further elevates the score to 0.9184 while reducing the hallucination-related error rate from 0.3750 to 0.0733, significantly outperforming baseline models like AcuGPT, HuatuoGPT-o1, MedChatZH, and LLaMA-3.1. In the expert-in-the-loop blind evaluation, AcuModel-AcuAgent obtained a cumulative score of 78/100 (vs. 63 for AcuModel and 59 for AcuGPT).
+| Benchmark | AcuModel | AcuModel-AcuAgent | Best Baseline |
+|---|---|---|---|
+| SCQ-AcuBench (acc) | 0.7911 | — | 0.7629 (AcuGPT) |
+| QA-AcuEval (LLM-judge) | 0.6888 | **0.9184** | — |
+| Hallucination error rate | 0.3750 | **0.0733** | — |
+| Expert blind eval (/100) | 63 | **78** | 59 (AcuGPT) |
 
-System Architecture
-The AcuAgent workflow follows a "Route-Interact-Retrieve-Generate" closed-loop:
-1.  User Query ➡️ AcuRouter (Intent Recognition)
-2.  Clinical Diagnosis ➡️ Interactive Agent (Reverse Reasoning via AcuKG)
-3.  Knowledge Query ➡️ RAG / Database Agent (Retrieval & Reranking)
-4.  Final Response ➡️ AcuModel (Polished, Evidence-Based Output)
+Baselines: AcuGPT, HuatuoGPT-o1, MedChatZH, LLaMA-3.1.
 
-We are committed to the principles of Responsible AI in medicine. Given the clinical nature of the AcuModel and the potential risks associated with deploying generative models in real-world healthcare scenarios without supervision, we have decided to manage the distribution of the full model weights and training datasets.
-While the source literature (such as ancient TCM classics) is public, the high-quality instruction tuning datasets and expert-aligned preference data constructed in this study represent significant proprietary curation and annotation efforts.
-We enthusiastically support academic research. If you are a researcher or practitioner intending to use AcuAgent for non-commercial, academic purposes, we are more than happy to provide access.
+## Architecture
 
-To request access, please contact us:
-Email: 2024920301@stu.haut.edu.cn
-Subject: [Academic Request] Access to AcuModel & Data
-Content: Please include a brief introduction of your research team and the intended use of the model.
+```
+User Query → AcuRouter ─┬─ Clinical Diagnosis → Interactive Agent (reverse reasoning via AcuKG)
+                        └─ Knowledge Query    → RAG / Database Agent
+                                   ↓
+                        AcuModel → Evidence-based response
+```
 
-We verify requests to prevent misuse and foster a safe research community. We look forward to your email!
+## Model & Data Access
 
-
+To prevent misuse, full weights and tuning datasets are shared for **non-commercial academic use only**. Please email 2024920301@stu.haut.edu.cn with subject `[Academic Request] Access to AcuModel & Data`, including your team intro and intended use.
