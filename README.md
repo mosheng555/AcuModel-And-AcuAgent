@@ -15,8 +15,8 @@
 | Benchmark | AcuModel | AcuModel-AcuAgent | Best Baseline |
 |---|---|---|---|
 | SCQ-AcuBench (acc) | 0.7911 | — | 0.7629 (AcuGPT) |
-| QA-AcuEval (LLM-judge) | 0.6888 | **0.9184** | — |
-| Hallucination error rate | 0.3750 | **0.0733** | — |
+| QA-AcuEval (LLM-judge) | 0.6888 | **0.9184** | 0.6457(AcuGPT) |
+| Hallucination error rate | 0.3750 | **0.0733** | 0.4083(AcuGPT) |
 | Expert blind eval (/100) | 63 | **78** | 59 (AcuGPT) |
 
 Baselines: AcuGPT, HuatuoGPT-o1, MedChatZH, LLaMA-3.1.
