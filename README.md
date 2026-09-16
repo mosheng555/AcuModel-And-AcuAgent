@@ -21,14 +21,6 @@
 
 Baselines: AcuGPT, HuatuoGPT-o1, MedChatZH, LLaMA-3.1.
 
-## Architecture
-
-```
-User Query → AcuRouter ─┬─ Clinical Diagnosis → Interactive Agent (reverse reasoning via AcuKG)
-                        └─ Knowledge Query    → RAG / Database Agent
-                                   ↓
-                        AcuModel → Evidence-based response
-```
 
 ## Model & Data Access
 
